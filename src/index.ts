@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import * as ZapparBabylon from '@zappar/zappar-babylonjs';
-
 import "./style.css";
+
 
 // Setup BabylonJS in the usual way
 const canvas = document.createElement('canvas');
@@ -28,8 +28,10 @@ ZapparBabylon.permissionRequestUI().then((granted) => {
 const faceTracker = new ZapparBabylon.FaceTrackerLoader().load();
 const trackerTransformNode = new ZapparBabylon.FaceTrackerTransformNode('tracker', camera, faceTracker, scene);
 
+const url = new URL("./faceMeshTemplate.png", import.meta.url).href;
 const material = new BABYLON.StandardMaterial('mat', scene);
-material.diffuseTexture = new BABYLON.Texture(require("file-loader!./faceMeshTemplate.png").default, scene);
+material.diffuseTexture = new BABYLON.Texture(url, scene);
+
 
 // Face mesh
 const faceMesh = new ZapparBabylon.FaceMeshGeometry('mesh', scene);
